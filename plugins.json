@@ -1,0 +1,129 @@
+[
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=scandal.dutamovie21.cc&sz=256",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rizqira/acheetozmovie",
+        "fileSize": 16370,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "aci",
+            "TeKuma25"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 2,
+        "internalName": "Dutamovie",
+        "description": "DutaMovie",
+        "url": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/Dutamovie.cs3",
+        "name": "Dutamovie"
+    },
+    {
+        "iconUrl": "https://github.com/SaurabhKaperwan/CSX/raw/refs/heads/master/Extractors/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rizqira/acheetozmovie",
+        "fileSize": 38552,
+        "status": 1,
+        "authors": [
+            "megix"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie",
+            "AsianDrama",
+            "Anime"
+        ],
+        "version": 1,
+        "internalName": "Extractors",
+        "description": "Must Install(For other extensions to work properly)",
+        "url": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/Extractors.cs3",
+        "name": "Extractors"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=tv7.lk21.am.in&sz=%size%",
+        "jarFileSize": 84949,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rizqira/acheetozmovie",
+        "fileSize": 19496,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "aci,Phisher98"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 3,
+        "internalName": "LayarKacaProvider",
+        "jarUrl": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/LayarKacaProvider.jar",
+        "url": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/LayarKacaProvider.cs3",
+        "name": "LayarKacaProvider"
+    },
+    {
+        "iconUrl": "https://github.com/SaurabhKaperwan/CSX/raw/refs/heads/master/Moviesmod/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rizqira/acheetozmovie",
+        "fileSize": 28147,
+        "status": 1,
+        "authors": [
+            "aci"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie",
+            "AsianDrama",
+            "Anime"
+        ],
+        "version": 1,
+        "internalName": "Moviesmod",
+        "description": "Includes Topmovies",
+        "url": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/Moviesmod.cs3",
+        "name": "Moviesmod"
+    },
+    {
+        "iconUrl": "https://github.com/SaurabhKaperwan/CSX/raw/refs/heads/master/NetflixMirrorProvider/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rizqira/acheetozmovie",
+        "fileSize": 42491,
+        "status": 1,
+        "authors": [
+            "aci"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 1,
+        "internalName": "Netflixmirror",
+        "description": "Netflix, PrimeVideo, Disney Hotstar Content in Multiple Languages",
+        "url": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/Netflixmirror.cs3",
+        "name": "Netflixmirror"
+    },
+    {
+        "iconUrl": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://ww03.pencurimovie.bond&size=%size%",
+        "jarFileSize": 48911,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/rizqira/acheetozmovie",
+        "fileSize": 12656,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 4,
+        "internalName": "Pencurimovie",
+        "jarUrl": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/Pencurimovie.jar",
+        "description": "Pencurimovie ",
+        "url": "https://raw.githubusercontent.com/rizqira/acheetozmovie/builds/Pencurimovie.cs3",
+        "name": "Pencurimovie"
+    }
+]
