@@ -1,4 +1,4 @@
-package com.horis.Netflixmirror
+package com.Netflixmirror
 
 import android.content.Context
 import android.content.SharedPreferences

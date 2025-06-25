@@ -1,9 +1,9 @@
-package com.horis.Netflixmirror
+package com.Netflixmirror
 
-import com.horis.Netflixmirror.entities.EpisodesData
-import com.horis.Netflixmirror.entities.PlayList
-import com.horis.Netflixmirror.entities.PostData
-import com.horis.Netflixmirror.entities.SearchData
+import com.Netflixmirror.entities.EpisodesData
+import com.Netflixmirror.entities.PlayList
+import com.Netflixmirror.entities.PostData
+import com.Netflixmirror.entities.SearchData
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.toJson

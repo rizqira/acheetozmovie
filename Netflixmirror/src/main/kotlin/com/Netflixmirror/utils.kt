@@ -1,4 +1,4 @@
-package com.horis.Netflixmirror
+package com.Netflixmirror
 
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
