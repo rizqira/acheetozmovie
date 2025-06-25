@@ -47,11 +47,30 @@ class aci : MainAPI() {
                     "status=&tipe=Movie&urutan=populer" to "Movie Terpopuler",
             )
 
-    override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val document = app.get("$mainUrl/pencarian/?${request.data}&halaman=$page").document
-        val home = document.select("div.listupd div.bs").map { it.toSearchResult() }
-        return newHomePageResponse(request.name, home)
+    private suspend fun loadFixedExtractor(
+    url: String,
+    quality: String?,
+    referer: String? = null,
+    subtitleCallback: (SubtitleFile) -> Unit,
+    callback: (ExtractorLink) -> Unit
+) {
+    loadExtractor(url, referer, subtitleCallback) { link ->
+        callback.invoke(
+            newExtractorLink(
+                source = link.name,
+                name = link.name,
+                url = link.url,
+                referer = link.referer ?: "",
+                quality = if (link.type == ExtractorLinkType.M3U8 || link.name == "Uservideo")
+                    link.quality
+                else getIndexQuality(quality),
+                type = link.type,
+                headers = link.headers ?: mapOf(),
+                extractorData = link.extractorData
+            )
+        )
     }
+}
 
     private fun getProperAnimeLink(uri: String): String {
         return if (uri.contains("/anime/")) {
