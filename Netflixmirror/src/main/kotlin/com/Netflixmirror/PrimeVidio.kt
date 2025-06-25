@@ -5,10 +5,10 @@ package com.Netflixmirror
 import android.util.Log
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
-import com.Netflixmirrorn.entities.EpisodesData
-import com.Netflixmirrorn.entities.PlayList
-import com.Netflixmirrorn.entities.PostData
-import com.Netflixmirrorn.entities.SearchData
+import com.Netflixmirror.entities.EpisodesData
+import com.Netflixmirror.entities.PlayList
+import com.Netflixmirror.entities.PostData
+import com.Netflixmirror.entities.SearchData
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.httpsify
