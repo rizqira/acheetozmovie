@@ -1,21 +1,18 @@
-package com.Netflixmirror.entities
+version = 1
 
-data class PostData(
-    val desc: String?,
-    val director: String?,
-    val ua: String?,
-    val episodes: List<Episode?>,
-    val genre: String?,
-    val nextPage: Int?,
-    val nextPageSeason: String?,
-    val nextPageShow: Int?,
-    val season: List<Season>?,
-    val title: String,
-    val year: String,
-    val cast: String?,
-    val match: String?,
-    val runtime: String?,
-    val suggest: List<Id>?,
-)
+cloudstream {
+    authors     = listOf("Horis, megix", "Netflixmirror")
+    language    = "en"
+    description = "Netflix, PrimeVideo Content in Multiple Languages"
 
-data class Id(val id: String)
+    /**
+     * Status int as the following:
+     * 0: Down
+     * 1: Ok
+     * 2: Slow
+     * 3: Beta only
+    **/
+    status  = 1 // will be 3 if unspecified
+    tvTypes = listOf("Movie", "TvSeries")
+    iconUrl = "https://iosmirror.cc/img/nf2/icon_x192.png"
+}
