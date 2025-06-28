@@ -38,14 +38,14 @@ class Animasu : MainAPI() {
     }
 
     override val mainPage =
-            mainPageOf(
-                    "urutan=update" to "Baru diupdate",
-                    "status=&tipe=&urutan=publikasi" to "Baru ditambahkan",
-                    "status=&tipe=&urutan=populer" to "Terpopuler",
-                    "status=&tipe=&urutan=rating" to "Rating Tertinggi",
-                    "status=&tipe=Movie&urutan=update" to "Movie Terbaru",
-                    "status=&tipe=Movie&urutan=populer" to "Movie Terpopuler",
-            )
+        mainPageOf(
+            "urutan=update" to "Baru diupdate",
+            "status=&tipe=&urutan=publikasi" to "Baru ditambahkan",
+            "status=&tipe=&urutan=populer" to "Terpopuler",
+            "status=&tipe=&urutan=rating" to "Rating Tertinggi",
+            "status=&tipe=Movie&urutan=update" to "Movie Terbaru",
+            "status=&tipe=Movie&urutan=populer" to "Movie Terpopuler",
+        )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get("$mainUrl/pencarian/?${request.data}&halaman=$page").document
@@ -59,12 +59,12 @@ class Animasu : MainAPI() {
         } else {
             var title = uri.substringAfter("$mainUrl/")
             title =
-                    when {
-                        (title.contains("-episode")) && !(title.contains("-movie")) ->
-                                title.substringBefore("-episode")
-                        (title.contains("-movie")) -> title.substringBefore("-movie")
-                        else -> title
-                    }
+                when {
+                    (title.contains("-episode")) && !(title.contains("-movie")) ->
+                        title.substringBefore("-episode")
+                    (title.contains("-movie")) -> title.substringBefore("-movie")
+                    else -> title
+                }
 
             "$mainUrl/anime/$title"
         }
@@ -91,37 +91,37 @@ class Animasu : MainAPI() {
         val document = app.get(url).document
 
         val title =
-                document.selectFirst("div.infox h1")
-                        ?.text()
-                        .toString()
-                        .replace("Sub Indo", "")
-                        .trim()
+            document.selectFirst("div.infox h1")
+                ?.text()
+                .toString()
+                .replace("Sub Indo", "")
+                .trim()
         val poster = document.selectFirst("div.bigcontent img")?.attr("src").toString()
 
         val table = document.selectFirst("div.infox div.spe")
         val type = getType(table?.selectFirst("span:contains(Jenis:)")?.ownText())
         val year =
-                table?.selectFirst("span:contains(Rilis:)")
-                        ?.ownText()
-                        ?.substringAfterLast(",")
-                        ?.trim()
-                        ?.toIntOrNull()
+            table?.selectFirst("span:contains(Rilis:)")
+                ?.ownText()
+                ?.substringAfterLast(",")
+                ?.trim()
+                ?.toIntOrNull()
         val status = table?.selectFirst("span:contains(Status:) font")?.text()
         val trailer = document.selectFirst("div.trailer iframe")?.attr("src")
         val episodes =
-                document.select("ul#daftarepisode > li")
-                        .map {
-                            val link = fixUrl(it.selectFirst("a")!!.attr("href"))
-                            val name = it.selectFirst("a")?.text() ?: ""
-                            val episode =
-                                    Regex("Episode\\s?(\\d+)")
-                                            .find(name)
-                                            ?.groupValues
-                                            ?.getOrNull(0)
-                                            ?.toIntOrNull()
-                            Episode(link, episode = episode)
-                        }
-                        .reversed()
+            document.select("ul#daftarepisode > li")
+                .map {
+                    val link = fixUrl(it.selectFirst("a")!!.attr("href"))
+                    val name = it.selectFirst("a")?.text() ?: ""
+                    val episode =
+                        Regex("Episode\\s?(\\d+)")
+                            .find(name)
+                            ?.groupValues
+                            ?.getOrNull(0)
+                            ?.toIntOrNull()
+                    Episode(link, episode = episode)
+                }
+                .reversed()
 
         val tracker = APIHolder.getTracker(listOf(title), TrackerType.getTypes(type), year, true)
 
@@ -140,51 +140,52 @@ class Animasu : MainAPI() {
     }
 
     override suspend fun loadLinks(
-            data: String,
-            isCasting: Boolean,
-            subtitleCallback: (SubtitleFile) -> Unit,
-            callback: (ExtractorLink) -> Unit
+        data: String,
+        isCasting: Boolean,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
     ): Boolean {
         val document = app.get(data).document
         document.select(".mobius > .mirror > option")
-                .mapNotNull {
-                    fixUrl(
-                            Jsoup.parse(base64Decode(it.attr("value"))).select("iframe").attr("src")
-                    ) to it.text()
-                }
-                .apmap { (iframe, quality) ->
-                    loadFixedExtractor(
-                            iframe.fixIframe(),
-                            quality,
-                            "$mainUrl/",
-                            subtitleCallback,
-                            callback
-                    )
-                }
+            .mapNotNull {
+                fixUrl(
+                    Jsoup.parse(base64Decode(it.attr("value"))).select("iframe").attr("src")
+                ) to it.text()
+            }
+            .apmap { (iframe, quality) ->
+                loadFixedExtractor(
+                    iframe.fixIframe(),
+                    quality,
+                    "$mainUrl/",
+                    subtitleCallback,
+                    callback
+                )
+            }
         return true
     }
 
     private suspend fun loadFixedExtractor(
-            url: String,
-            quality: String?,
-            referer: String? = null,
-            subtitleCallback: (SubtitleFile) -> Unit,
-            callback: (ExtractorLink) -> Unit
+        url: String,
+        quality: String?,
+        referer: String? = null,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
     ) {
         loadExtractor(url, referer, subtitleCallback) { link ->
+            // BARIS INI YANG DIPERBAIKI (PREVIOUSLY LINE 176)
             callback.invoke(
-                    ExtractorLink(
-                            link.name,
-                            link.name,
-                            link.url,
-                            link.referer,
-                            if (link.type == ExtractorLinkType.M3U8 || link.name == "Uservideo")
-                                    link.quality
-                            else getIndexQuality(quality),
-                            link.type,
-                            link.headers,
-                            link.extractorData
-                    )
+                newExtractorLink( // Ganti ExtractorLink(...) dengan newExtractorLink(...)
+                    name = link.name,
+                    source = link.name, // Biasanya name dan source sama, bisa disesuaikan
+                    url = link.url,
+                    referer = link.referer,
+                    quality = if (link.type == ExtractorLinkType.M3U8 || link.name == "Uservideo")
+                        link.quality
+                    else getIndexQuality(quality),
+                    type = link.type,
+                    headers = link.headers,
+                    extractorData = link.extractorData
+                )
             )
         }
     }
@@ -199,7 +200,7 @@ class Animasu : MainAPI() {
 
     private fun getIndexQuality(str: String?): Int {
         return Regex("(\\d{3,4})[pP]").find(str ?: "")?.groupValues?.getOrNull(1)?.toIntOrNull()
-                ?: Qualities.Unknown.value
+            ?: Qualities.Unknown.value
     }
 
     private fun Element.getImageAttr(): String {

@@ -9,10 +9,11 @@ import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils
 import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
 import com.lagradost.cloudstream3.utils.ExtractorApi
-import com.lagradost.cloudstream3.utils.ExtractorLink
+// import com.lagradost.cloudstream3.utils.ExtractorLink // Tidak perlu diimport lagi jika hanya menggunakan newExtractorLink
 import com.lagradost.cloudstream3.utils.INFER_TYPE
 import com.lagradost.cloudstream3.utils.Qualities
 
+// --- CLASS ARCHIVD ---
 class Archivd : ExtractorApi() {
     override val name: String = "Archivd"
     override val mainUrl: String = "https://archivd.net"
@@ -28,8 +29,9 @@ class Archivd : ExtractorApi() {
         val json = res.select("div#app").attr("data-page")
         val video = AppUtils.tryParseJson<Sources>(json)?.props?.datas?.data?.link?.media
         callback.invoke(
-            ExtractorLink(
-                source = this.name,
+            // Perbaikan di sini: Ganti ExtractorLink dengan newExtractorLink
+            newExtractorLink(
+                source = this.name, // Parameter 'source' harus disertakan
                 name = this.name,
                 url = video ?: return,
                 referer = "$mainUrl/",
@@ -61,6 +63,7 @@ class Archivd : ExtractorApi() {
     )
 }
 
+// --- CLASS NEWUSERVIDEO ---
 class Newuservideo : ExtractorApi() {
     override val name: String = "Uservideo"
     override val mainUrl: String = "https://new.uservideo.xyz"
@@ -79,8 +82,9 @@ class Newuservideo : ExtractorApi() {
 
         AppUtils.tryParseJson<Sources>(json)?.streams?.map {
             callback.invoke(
-                ExtractorLink(
-                    source = this.name,
+                // Perbaikan di sini: Ganti ExtractorLink dengan newExtractorLink
+                newExtractorLink(
+                    source = this.name, // Parameter 'source' harus disertakan
                     name = this.name,
                     url = it.playUrl ?: return@map,
                     referer = "$mainUrl/",
@@ -106,47 +110,13 @@ class Newuservideo : ExtractorApi() {
     )
 }
 
+// --- CLASS VIDHIDEPRO ---
 class Vidhidepro : Filesim() {
     override val mainUrl = "https://vidhidepro.com"
     override val name = "Vidhidepro"
 }
 
+// --- CLASS BLOGGER ---
 open class Blogger : ExtractorApi() {
     override val name = "Blogger"
-    override val mainUrl = "https://www.blogger.com"
-    override val requiresReferer = false
-
-    override suspend fun getUrl(url: String, referer: String?): List<ExtractorLink> {
-        val sources = mutableListOf<ExtractorLink>()
-        with(app.get(url).document) {
-            this.select("script").map { script ->
-                if (script.data().contains("\"streams\":[")) {
-                    val data = script.data().substringAfter("\"streams\":[").substringBefore("]")
-                    tryParseJson<List<ResponseSource>>("[$data]")?.map {
-                        sources.add(
-                            ExtractorLink(
-                                source = name,
-                                name = name,
-                                url = it.play_url,
-                                referer = "https://www.youtube.com/",
-                                quality = when (it.format_id) {
-                                    18 -> 360
-                                    22 -> 720
-                                    else -> Qualities.Unknown.value
-                                },
-                                type = INFER_TYPE,
-                                headers = emptyMap()
-                            )
-                        )
-                    }
-                }
-            }
-        }
-        return sources
-    }
-
-    private data class ResponseSource(
-        @JsonProperty("play_url") val play_url: String,
-        @JsonProperty("format_id") val format_id: Int
-    )
-}
+    override val mainUrl = "https
